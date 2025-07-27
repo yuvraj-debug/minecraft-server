@@ -24,8 +24,8 @@
             --success: #10b981;
             --warning: #f59e0b;
             --danger: #ef4444;
-            --transition: all 0.3s ease;
-            --border-radius: 12px;
+            --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            --border-radius: 16px;
             --shadow-sm: 0 4px 6px rgba(0, 0, 0, 0.1);
             --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.3);
             --glow-primary: 0 0 15px rgba(139, 92, 246, 0.6);
@@ -101,8 +101,38 @@
         }
 
         section {
-            padding: 6rem 0;
+            padding: 8rem 0;
             position: relative;
+        }
+
+        /* Section Dividers */
+        .wave-divider {
+            position: absolute;
+            left: 0;
+            width: 100%;
+            overflow: hidden;
+            line-height: 0;
+            z-index: 1;
+        }
+
+        .wave-divider svg {
+            position: relative;
+            display: block;
+            width: calc(100% + 1.3px);
+            height: 100px;
+        }
+
+        .wave-divider .shape-fill {
+            fill: var(--bg-primary);
+        }
+
+        .divider-top {
+            top: -1px;
+        }
+
+        .divider-bottom {
+            bottom: -1px;
+            transform: rotate(180deg);
         }
 
         /* NAVIGATION */
@@ -315,6 +345,109 @@
             100% { box-shadow: 0 0 25px rgba(139, 92, 246, 0.8); }
         }
 
+        /* ABOUT SECTION */
+        .about {
+            position: relative;
+            background: linear-gradient(135deg, rgba(59, 7, 100, 0.1), transparent);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text {
+            padding: 2rem;
+        }
+
+        .about-image {
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            height: 400px;
+            border-radius: var(--border-radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--glow-primary), var(--shadow-lg);
+        }
+
+        .about-image:before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            transform: rotate(30deg);
+        }
+
+        /* WHY JOIN SECTION */
+        .why-join {
+            background: linear-gradient(rgba(10, 14, 23, 0.9), rgba(10, 14, 23, 0.9));
+            position: relative;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(10px);
+            border-radius: var(--border-radius);
+            padding: 2.5rem;
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid rgba(139, 92, 246, 0.1);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .feature-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .feature-card:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, var(--accent-primary), var(--accent-secondary));
+            opacity: 0.7;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--glow-primary), var(--shadow-lg);
+            border-color: var(--accent-primary);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            display: block;
+            color: var(--accent-secondary);
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
         /* GAMEMODES SECTION */
         .gamemodes {
             display: grid;
@@ -380,6 +513,117 @@
 
         .gamemode-card p {
             margin-bottom: 1.5rem;
+        }
+
+        /* GALLERY SECTION */
+        .gallery {
+            background: linear-gradient(135deg, rgba(14, 165, 233, 0.05), transparent);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .gallery-item {
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            height: 250px;
+            border-radius: var(--border-radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            transition: var(--transition);
+            opacity: 0;
+            transform: scale(0.9);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .gallery-item.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .gallery-item:before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            transform: rotate(45deg);
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-10px) rotate(2deg);
+            box-shadow: var(--glow-primary), 0 20px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        /* STAFF SECTION */
+        .staff {
+            background: linear-gradient(rgba(10, 14, 23, 0.95), rgba(10, 14, 23, 0.95));
+        }
+
+        .staff-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 2rem;
+        }
+
+        .staff-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(10px);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid rgba(139, 92, 246, 0.1);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .staff-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .staff-card:hover {
+            transform: translateY(-15px);
+            box-shadow: var(--glow-primary), var(--shadow-lg);
+            border-color: var(--accent-primary);
+        }
+
+        .staff-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            margin: 0 auto 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: white;
+        }
+
+        .staff-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .staff-role {
+            color: var(--accent-secondary);
+            font-weight: 600;
+            margin-bottom: 1rem;
         }
 
         /* VOTE SECTION */
@@ -518,6 +762,245 @@
             font-weight: 700;
         }
 
+        /* TESTIMONIALS */
+        .testimonials {
+            background: linear-gradient(135deg, rgba(236, 72, 153, 0.05), transparent);
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .testimonial-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(10px);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid rgba(139, 92, 246, 0.1);
+            position: relative;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .testimonial-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .testimonial-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .testimonial-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            margin-right: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .testimonial-info h4 {
+            margin-bottom: 0.2rem;
+        }
+
+        .stars {
+            color: var(--warning);
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+        }
+
+        .testimonial-content {
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        /* ROADMAP */
+        .roadmap {
+            background: linear-gradient(rgba(10, 14, 23, 0.95), rgba(10, 14, 23, 0.95));
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(to bottom, var(--accent-primary), var(--accent-secondary));
+            left: 50%;
+            margin-left: -2px;
+        }
+
+        .timeline-item {
+            position: relative;
+            width: 50%;
+            padding: 1.5rem 2.5rem;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .timeline-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .timeline-item:nth-child(odd) {
+            left: 0;
+            text-align: right;
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 50%;
+        }
+
+        .timeline-content {
+            background: var(--bg-card);
+            backdrop-filter: blur(10px);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid rgba(139, 92, 246, 0.1);
+            transition: var(--transition);
+        }
+
+        .timeline-content:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--glow-primary), var(--shadow-lg);
+            border-color: var(--accent-primary);
+        }
+
+        .timeline-date {
+            color: var(--accent-secondary);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        /* FAQ */
+        .faq {
+            background: linear-gradient(135deg, rgba(59, 7, 100, 0.1), transparent);
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: var(--bg-card);
+            backdrop-filter: blur(10px);
+            border-radius: var(--border-radius);
+            margin-bottom: 1rem;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid rgba(139, 92, 246, 0.1);
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .faq-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .faq-question {
+            padding: 1.5rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: var(--transition);
+        }
+
+        .faq-question:hover {
+            background: rgba(139, 92, 246, 0.05);
+        }
+
+        .faq-question:after {
+            content: '+';
+            font-size: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .faq-item.active .faq-question:after {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            padding: 0 1.5rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+        }
+
+        .faq-item.active .faq-answer {
+            padding: 0 1.5rem 1.5rem;
+            max-height: 500px;
+        }
+
+        /* STATS */
+        .stats {
+            background: linear-gradient(135deg, rgba(14, 165, 233, 0.1), transparent);
+            text-align: center;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(10px);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid rgba(139, 92, 246, 0.1);
+            transition: var(--transition);
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .stat-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .stat-value {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(to right, var(--accent-primary), var(--accent-secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
         /* HIRE SECTION */
         .hire {
             background: 
@@ -623,6 +1106,10 @@
             h1 { font-size: 3rem; }
             h2 { font-size: 2.2rem; }
             .nav-links { gap: 1.5rem; }
+            .about-content { grid-template-columns: 1fr; }
+            .timeline:before { left: 30px; }
+            .timeline-item { width: 100%; padding-left: 70px; padding-right: 25px; }
+            .timeline-item:nth-child(even) { left: 0; }
         }
 
         @media (max-width: 768px) {
@@ -632,13 +1119,13 @@
             .hero-buttons { flex-direction: column; align-items: center; }
             .server-info { flex-direction: column; align-items: center; }
             .package-card.popular { transform: scale(1); }
+            section { padding: 6rem 0; }
         }
 
         @media (max-width: 576px) {
             h1 { font-size: 2rem; }
             h2 { font-size: 1.8rem; }
             .hero { padding-top: 3rem; }
-            section { padding: 4rem 0; }
             .gamemode-card, .package-card { padding: 1.5rem; }
             body { padding-top: 70px; }
         }
@@ -656,10 +1143,10 @@
             </a>
             <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
                 <li><a href="#gamemodes">Gamemodes</a></li>
+                <li><a href="#gallery">Gallery</a></li>
                 <li><a href="#vote">Vote</a></li>
-                <li><a href="#store">Store</a></li>
-                <li><a href="#hire">Hire Me</a></li>
             </ul>
         </div>
     </nav>
@@ -692,8 +1179,69 @@
         </div>
     </section>
     
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="wave-divider divider-top">
+            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
+            </svg>
+        </div>
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>About Our Server</h2>
+                    <p>Welcome to Example Server, where imagination meets endless possibilities. Founded in 2018, our server has grown into a vibrant community of passionate Minecraft players.</p>
+                    <p>Our world began as a small survival server but quickly evolved into a multi-dimensional universe with custom-crafted experiences. We believe in creating a welcoming environment where players of all skill levels can thrive.</p>
+                    <p>At the heart of our server is a dedicated team of developers, builders, and moderators who work tirelessly to deliver unique content, seasonal events, and constant improvements.</p>
+                </div>
+                <div class="about-image">
+                    <span style="font-size: 4rem;">🌌</span>
+                </div>
+            </div>
+        </div>
+        <div class="wave-divider divider-bottom">
+            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
+            </svg>
+        </div>
+    </section>
+    
+    <!-- Why Join Section -->
+    <section id="why" class="why-join">
+        <div class="container">
+            <h2>Why Join Our Server?</h2>
+            <p>Discover what makes our community truly special</p>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <span class="feature-icon">⏱️</span>
+                    <h3>99.9% Uptime</h3>
+                    <p>Our enterprise-grade infrastructure ensures you can play anytime without interruptions.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <span class="feature-icon">🛡️</span>
+                    <h3>Advanced Anti-Cheat</h3>
+                    <p>We use state-of-the-art systems to keep gameplay fair and cheat-free.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <span class="feature-icon">👨‍💼</span>
+                    <h3>Active Staff Team</h3>
+                    <p>Our dedicated team is always available to help and support our players.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <span class="feature-icon">🔄</span>
+                    <h3>Weekly Updates</h3>
+                    <p>We constantly add new content, features, and improvements to enhance your experience.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
     <!-- Gamemodes Section -->
-    <section id="gamemodes">
+    <section id="gamemodes" class="gamemodes-section">
         <div class="container">
             <h2>Featured Gamemodes</h2>
             <p>Discover our unique game experiences designed for endless fun and competition.</p>
@@ -723,6 +1271,61 @@
         </div>
     </section>
     
+    <!-- Gallery Section -->
+    <section id="gallery" class="gallery">
+        <div class="container">
+            <h2>Server Gallery</h2>
+            <p>Explore the amazing worlds built by our community</p>
+            
+            <div class="gallery-grid">
+                <div class="gallery-item">Castle</div>
+                <div class="gallery-item">Sky City</div>
+                <div class="gallery-item">Underground Base</div>
+                <div class="gallery-item">Medieval Village</div>
+                <div class="gallery-item">Futuristic Hub</div>
+                <div class="gallery-item">Fantasy Kingdom</div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Staff Section -->
+    <section id="staff" class="staff">
+        <div class="container">
+            <h2>Our Team</h2>
+            <p>The dedicated team behind our server's success</p>
+            
+            <div class="staff-grid">
+                <div class="staff-card">
+                    <div class="staff-avatar">A</div>
+                    <h3>Alex</h3>
+                    <div class="staff-role">Server Owner</div>
+                    <p>5+ years experience in server management</p>
+                </div>
+                
+                <div class="staff-card">
+                    <div class="staff-avatar">M</div>
+                    <h3>Maya</h3>
+                    <div class="staff-role">Lead Developer</div>
+                    <p>Custom plugin creator and Java expert</p>
+                </div>
+                
+                <div class="staff-card">
+                    <div class="staff-avatar">J</div>
+                    <h3>Jamie</h3>
+                    <div class="staff-role">Head Builder</div>
+                    <p>WorldEdit master and creative designer</p>
+                </div>
+                
+                <div class="staff-card">
+                    <div class="staff-avatar">R</div>
+                    <h3>Riley</h3>
+                    <div class="staff-role">Community Manager</div>
+                    <p>Keeps our community happy and engaged</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
     <!-- Vote Section -->
     <section id="vote" class="vote">
         <div class="container">
@@ -736,7 +1339,7 @@
     </section>
     
     <!-- Store Section -->
-    <section id="store">
+    <section id="store" class="store">
         <div class="container">
             <h2>Premium Store</h2>
             <p>Unlock amazing perks, cosmetics, and advantages to enhance your gameplay experience.</p>
@@ -786,6 +1389,159 @@
         </div>
     </section>
     
+    <!-- Testimonials -->
+    <section id="testimonials" class="testimonials">
+        <div class="container">
+            <h2>Player Testimonials</h2>
+            <p>See what our community members are saying</p>
+            
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <div class="testimonial-avatar">J</div>
+                        <div class="testimonial-info">
+                            <h4>John_Doe</h4>
+                            <div class="stars">★★★★★</div>
+                        </div>
+                    </div>
+                    <p class="testimonial-content">"I've played on many Minecraft servers, but none compare to Example. The community is amazing, the staff are helpful, and the custom features keep me coming back!"</p>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <div class="testimonial-avatar">S</div>
+                        <div class="testimonial-info">
+                            <h4>SkyQueen</h4>
+                            <div class="stars">★★★★★</div>
+                        </div>
+                    </div>
+                    <p class="testimonial-content">"The Skyblock mode here is the best I've ever played. The custom challenges and economy system make it so engaging. I've been playing daily for 6 months!"</p>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <div class="testimonial-avatar">C</div>
+                        <div class="testimonial-info">
+                            <h4>CreeperKing</h4>
+                            <div class="stars">★★★★★</div>
+                        </div>
+                    </div>
+                    <p class="testimonial-content">"The anti-cheat system actually works! I've never seen a server with such fair gameplay. Plus the weekly events keep things fresh and exciting."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Roadmap -->
+    <section id="roadmap" class="roadmap">
+        <div class="container">
+            <h2>Server Roadmap</h2>
+            <p>Our plans for the future of Example Server</p>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">Q3 2023</div>
+                        <h3>Seasonal Event: Summer Adventure</h3>
+                        <p>New summer-themed content, beach parties, and limited-time rewards.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">Q4 2023</div>
+                        <h3>New Gamemode: Dungeon Crawler</h3>
+                        <p>Procedurally generated dungeons with boss battles and epic loot.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">Q1 2024</div>
+                        <h3>Server Hardware Upgrade</h3>
+                        <p>Moving to dedicated enterprise hardware for better performance.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">Q2 2024</div>
+                        <h3>World Expansion: The Nether Update</h3>
+                        <p>Complete overhaul of the Nether dimension with new biomes and challenges.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- FAQ -->
+    <section id="faq" class="faq">
+        <div class="container">
+            <h2>Frequently Asked Questions</h2>
+            <p>Find answers to common questions about our server</p>
+            
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">How do I join the server?</div>
+                    <div class="faq-answer">
+                        <p>Simply open Minecraft, go to Multiplayer, click "Add Server", then enter our IP: play.example.net. Click "Done" and then "Join Server".</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">What version of Minecraft do you support?</div>
+                    <div class="faq-answer">
+                        <p>We currently support Minecraft Java Edition 1.19.2 and above. We update to new versions as soon as our plugins are compatible.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">Are there any rules I should know about?</div>
+                    <div class="faq-answer">
+                        <p>Yes! We have a comprehensive set of rules that promote fair play and a positive community. You can view them on our Discord server.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">How can I become a staff member?</div>
+                    <div class="faq-answer">
+                        <p>We regularly recruit staff from our active player base. Keep an eye on our Discord announcements for when applications open.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Stats -->
+    <section id="stats" class="stats">
+        <div class="container">
+            <h2>Server Statistics</h2>
+            <p>Some impressive numbers from our community</p>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value">124</div>
+                    <div class="stat-label">Players Online</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-value">42,891</div>
+                    <div class="stat-label">Total Players</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-value">1.2B</div>
+                    <div class="stat-label">Blocks Mined</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-value">98.7%</div>
+                    <div class="stat-label">Uptime</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
     <!-- Hire Me Section -->
     <section id="hire" class="hire">
         <div class="container">
@@ -812,8 +1568,8 @@
                     <h4>Quick Links</h4>
                     <ul>
                         <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About</a></li>
                         <li><a href="#gamemodes">Gamemodes</a></li>
-                        <li><a href="#vote">Vote</a></li>
                         <li><a href="#store">Store</a></li>
                     </ul>
                 </div>
@@ -844,6 +1600,9 @@
             
             // Initialize scroll animations
             initScrollAnimations();
+            
+            // Initialize FAQ toggles
+            initFAQ();
             
             // Nav scroll effect
             window.addEventListener('scroll', function() {
@@ -960,8 +1719,39 @@
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         // Animate section content
-                        if (entry.target.id === 'gamemodes') {
+                        if (entry.target.id === 'about') {
+                            const content = entry.target.querySelector('.about-content');
+                            setTimeout(() => {
+                                content.style.opacity = 1;
+                                content.style.transform = 'translateY(0)';
+                            }, 300);
+                        }
+                        else if (entry.target.id === 'why') {
+                            const cards = entry.target.querySelectorAll('.feature-card');
+                            cards.forEach((card, index) => {
+                                setTimeout(() => {
+                                    card.classList.add('visible');
+                                }, 200 * index);
+                            });
+                        }
+                        else if (entry.target.id === 'gamemodes') {
                             const cards = entry.target.querySelectorAll('.gamemode-card');
+                            cards.forEach((card, index) => {
+                                setTimeout(() => {
+                                    card.classList.add('visible');
+                                }, 200 * index);
+                            });
+                        }
+                        else if (entry.target.id === 'gallery') {
+                            const items = entry.target.querySelectorAll('.gallery-item');
+                            items.forEach((item, index) => {
+                                setTimeout(() => {
+                                    item.classList.add('visible');
+                                }, 150 * index);
+                            });
+                        }
+                        else if (entry.target.id === 'staff') {
+                            const cards = entry.target.querySelectorAll('.staff-card');
                             cards.forEach((card, index) => {
                                 setTimeout(() => {
                                     card.classList.add('visible');
@@ -982,6 +1772,38 @@
                                 }, 200 * index);
                             });
                         }
+                        else if (entry.target.id === 'testimonials') {
+                            const cards = entry.target.querySelectorAll('.testimonial-card');
+                            cards.forEach((card, index) => {
+                                setTimeout(() => {
+                                    card.classList.add('visible');
+                                }, 200 * index);
+                            });
+                        }
+                        else if (entry.target.id === 'roadmap') {
+                            const items = entry.target.querySelectorAll('.timeline-item');
+                            items.forEach((item, index) => {
+                                setTimeout(() => {
+                                    item.classList.add('visible');
+                                }, 300 * index);
+                            });
+                        }
+                        else if (entry.target.id === 'faq') {
+                            const items = entry.target.querySelectorAll('.faq-item');
+                            items.forEach((item, index) => {
+                                setTimeout(() => {
+                                    item.classList.add('visible');
+                                }, 200 * index);
+                            });
+                        }
+                        else if (entry.target.id === 'stats') {
+                            const cards = entry.target.querySelectorAll('.stat-card');
+                            cards.forEach((card, index) => {
+                                setTimeout(() => {
+                                    card.classList.add('visible');
+                                }, 200 * index);
+                            });
+                        }
                         else if (entry.target.id === 'hire') {
                             const content = entry.target.querySelector('.hire-content');
                             setTimeout(() => {
@@ -995,6 +1817,26 @@
             // Observe sections
             document.querySelectorAll('section').forEach(section => {
                 observer.observe(section);
+            });
+        }
+        
+        function initFAQ() {
+            const faqItems = document.querySelectorAll('.faq-item');
+            
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                
+                question.addEventListener('click', () => {
+                    // Close other items
+                    faqItems.forEach(otherItem => {
+                        if (otherItem !== item) {
+                            otherItem.classList.remove('active');
+                        }
+                    });
+                    
+                    // Toggle current item
+                    item.classList.toggle('active');
+                });
             });
         }
     </script>
